@@ -72,12 +72,14 @@ namespace ProgramChat
             if (data.UserId == username)
             {
                 Debug.Log("Same username");
-                chatBoxText.text += "\n<align=right>" + data.Msg;
+                
+                chatBoxText.text +="\n<align=right>" + data.UserId+ ":\n<align=right>" + data.Msg;
             }
             else
             {
                 Debug.Log("different username");
-                chatBoxText.text += "\n<align=left>" + data.Msg;
+                
+                chatBoxText.text +="\n<align=left>" + data.UserId+ ":\n<align=left>" + data.Msg;
             }
             Debug.Log("Message from server :" + data.Msg);
         }
