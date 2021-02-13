@@ -15,6 +15,18 @@ namespace ChatWebSocketWithJson
             public string username;
             public string message;
         }
+
+        struct SocketEvent
+        {
+            public string eventName;
+            public string roomName; //data
+
+            public SocketEvent(string eventName, string roomName)
+            {
+                this.eventName = eventName;
+                this.roomName = roomName;
+            }
+        }
         public GameObject rootConnection;
         public GameObject rootMessenger;
 
@@ -42,7 +54,13 @@ namespace ChatWebSocketWithJson
             ws.OnMessage += OnMessage;
 
             ws.Connect();
+            
+            SocketEvent socketEvent = new SocketEvent("CreateRoom", "TestRoom01");
 
+            string toJsonStr = JsonUtility.ToJson(socketEvent);
+            
+            ws.Send(toJsonStr);
+            
             rootConnection.SetActive(false);
             rootMessenger.SetActive(true);
         }
